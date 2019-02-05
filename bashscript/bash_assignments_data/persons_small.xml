@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persons>
+  <person name="Rebekah Kirsche">
+    <personality>Hardworking, Careless</personality>
+    <employment>Cartographer</employment>
+    <birth_day>1983-12-7</birth_day>
+  </person>
+  <person name="Joycelyn Loetstein">
+    <mothers_name>Tscharke</mothers_name>
+    <personality>Perceptive, Patronizing, Trustworthy</personality>
+    <employment>Oceanographer</employment>
+  </person>
+  <person name="Geno Palomares Morstedt">
+    <employment>Stockbroker</employment>
+    <ID_number>733265098820939</ID_number>
+    <mothers_name>Escarate</mothers_name>
+  </person>
+  <person name="Shaida Boms">
+    <birth_day>1985-1-8</birth_day>
+    <ID_number>43298815757784</ID_number>
+    <mothers_name>Kruch</mothers_name>
+    <relationship_status>domestic partnership</relationship_status>
+  </person>
+</persons>
