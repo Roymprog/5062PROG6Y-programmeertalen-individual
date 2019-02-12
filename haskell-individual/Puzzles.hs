@@ -28,14 +28,22 @@ reverse_foldr xs = foldr (\x acc -> acc Puzzles.++ [x]) [] xs
 reverse_foldl :: [a] -> [a]
 reverse_foldl xs = foldl (\acc x -> x : acc) [] xs
 
--- 8) Defines !! using foldl
--- (!!) :: [a] -> Int -> a
--- (!!) i = foldl (\acc x -> acc) a
+-- -- 8) Defines !! using foldl
+(!!) :: [a] -> Int -> a
+(!!) [] _ = error "Can't get item from empty list"
+(!!) xs i = foldl (\acc x -> if i == fst x then snd x else acc) (head xs) zipped
+	where zipped = zip [0..] xs
 
 -- 9) Returns whether list is a palindrome or not
 isPalindrome :: Eq a => [a] -> Bool
 isPalindrome xs = ( xs == reverse_foldl xs )
 
 -- 10) Returns infinite list of Fibonacci numbers in terms of scanl
-fibinf :: Num a -> a
-fibinf = scanl (\acc x -> )
+fibinf :: [Integer]
+fibinf = scanl (+) 0 (1:fibinf)
+
+type List = (Int) -> Int
+
+-- -- 11) Add element to list
+-- addToList :: List -> Int -> List
+-- addToList l x = l
