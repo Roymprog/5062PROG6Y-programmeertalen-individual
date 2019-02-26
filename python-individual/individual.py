@@ -38,8 +38,7 @@ def opgave3a(filename):
     return grid
 
 
-def opgave3b(filename):
-    mylist = opgave3a(filename)
+def opgave3b(mylist):
     for row in mylist:
         for x in row:
             sys.stdout.write(str(x) + " ")
