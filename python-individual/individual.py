@@ -14,13 +14,13 @@ def get_all_values(mylist):
 
 
 def opgave1(mylist):
-    all_values = get_all_values()
+    all_values = get_all_values(mylist)
 
     return all([x in mylist for x in all_values])
 
 
 def opgave2(mylist):
-    all_values = get_all_values()
+    all_values = get_all_values(mylist)
 
     return (n for n in list(filter(lambda x: x not in mylist, all_values)))
 
@@ -53,8 +53,8 @@ def opgave3(filename):
 def sum_nested_it(mylist):
     som = 0
     for x in mylist:
-        if isinstance(x, (list, range)):
+        if hasattr(x, "__iter__"):
             mylist.extend(x)
-        else:
+        elif isinstance(x, int):
             som = som + x
     return som
