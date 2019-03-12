@@ -61,23 +61,21 @@ func filterNumbers(numbersLeft chan int, done chan int) {
 	new_goroutines_spawned := 0
 
 	for {
-		select {
-			case current, ok := <- numbersLeft:
-				if (current % filterInt > 0 ) {
-					if (new_goroutines_spawned == 0) {
-						go filterNumbers(newList, done)
-						new_goroutines_spawned++
-					}
-					newList <- current
-				} else if (!ok) {
-					close(newList)
-					// When previous stream is closed and current stream has
-					// not spawned a new routine, we're done
-					if (new_goroutines_spawned == 0) {
-						done <- 0
-					}
-					return
-				}
+		current, ok := <- numbersLeft
+		if (current % filterInt > 0 ) {
+			if (new_goroutines_spawned == 0) {
+				go filterNumbers(newList, done)
+				new_goroutines_spawned++
+			}
+			newList <- current
+		} else if (!ok) {
+			close(newList)
+			// When previous stream is closed and current stream has
+			// not spawned a new routine, we're done
+			if (new_goroutines_spawned == 0) {
+				done <- 0
+			}
+			return
 		}
 	}
 }
