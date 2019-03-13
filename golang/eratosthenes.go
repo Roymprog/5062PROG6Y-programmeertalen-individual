@@ -66,21 +66,21 @@ func filterNumbers(numbersLeft chan int, done chan int) {
 	newList := make(chan int)
 
 	// Ensure each number only starts one new goroutine
-	new_goroutines_spawned := 0
+	goRoutineSpawned := false
 
 	for {
 		current, ok := <-numbersLeft
 		if current%filterInt > 0 {
-			if new_goroutines_spawned == 0 {
+			if !goRoutineSpawned {
 				go filterNumbers(newList, done)
-				new_goroutines_spawned++
+				goRoutineSpawned = true
 			}
 			newList <- current
 		} else if !ok {
 			close(newList)
 			// When previous stream is closed and current stream has
 			// not spawned a new routine, we're done
-			if new_goroutines_spawned == 0 {
+			if !goRoutineSpawned {
 				done <- 0
 			}
 			return
