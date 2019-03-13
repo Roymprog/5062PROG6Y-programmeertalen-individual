@@ -1,3 +1,11 @@
+/*
+*		Author: Roy van Santen	-  6081282
+*
+*		This program takes as command line argument a number greater or equal to 2
+*		and will print all prime numbers starting from 2 up to the defined number n.
+*		The prime number output will be printed to stdout.
+*
+ */
 package main
 
 import (
