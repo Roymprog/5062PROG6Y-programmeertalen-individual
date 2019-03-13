@@ -6,6 +6,7 @@
 *		The prime number output will be printed to stdout.
 *
  */
+
 package main
 
 import (
@@ -79,7 +80,8 @@ func filterNumbers(numbersLeft chan int, done chan int) {
 		} else if !ok {
 			close(newList)
 			// When previous stream is closed and current stream has
-			// not spawned a new routine, we're done
+			// not spawned a new routine, no more primes can be found,
+			// so we're done
 			if !goRoutineSpawned {
 				done <- 0
 			}
