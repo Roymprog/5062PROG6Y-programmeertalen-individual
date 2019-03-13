@@ -1,6 +1,6 @@
 package main
 
-import(
+import (
 	"fmt"
 	"os"
 	"strconv"
@@ -10,7 +10,7 @@ func main() {
 	args := os.Args
 
 	// Accept exactly 1 command line argument, ignoring program name as argument
-	if (cap(args) != 2) {
+	if cap(args) != 2 {
 		fmt.Println("Need at least, and not more than, 1 command line arguments")
 		return
 	}
@@ -19,13 +19,13 @@ func main() {
 	n, err := strconv.Atoi(args[1])
 
 	// Ensure input can be converted to integer
-	if (err != nil) {
+	if err != nil {
 		fmt.Println("Could not convert input string to int value")
 		return
 	}
 
 	// Do not accept integers smaller or equal to 1
-	if (n <= 1) {
+	if n <= 1 {
 		fmt.Println("Please provide a number that is greater than one")
 		return
 	}
@@ -46,12 +46,12 @@ func main() {
 	close(allNumbers)
 
 	// Wait till final channel is closed
-	<- done
+	<-done
 }
 
 func filterNumbers(numbersLeft chan int, done chan int) {
 	// Prime number is first number in new stream
-	filterInt := <- numbersLeft
+	filterInt := <-numbersLeft
 	fmt.Println(filterInt)
 
 	// Make new channel to send non-filtered numbers to
@@ -61,18 +61,18 @@ func filterNumbers(numbersLeft chan int, done chan int) {
 	new_goroutines_spawned := 0
 
 	for {
-		current, ok := <- numbersLeft
-		if (current % filterInt > 0 ) {
-			if (new_goroutines_spawned == 0) {
+		current, ok := <-numbersLeft
+		if current%filterInt > 0 {
+			if new_goroutines_spawned == 0 {
 				go filterNumbers(newList, done)
 				new_goroutines_spawned++
 			}
 			newList <- current
-		} else if (!ok) {
+		} else if !ok {
 			close(newList)
 			// When previous stream is closed and current stream has
 			// not spawned a new routine, we're done
-			if (new_goroutines_spawned == 0) {
+			if new_goroutines_spawned == 0 {
 				done <- 0
 			}
 			return
